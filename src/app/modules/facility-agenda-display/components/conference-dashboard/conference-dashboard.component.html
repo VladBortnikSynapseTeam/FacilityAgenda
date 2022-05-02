@@ -1,0 +1,32 @@
+<div class="dashboard__container" *ngIf="isLoaderActive == false">
+
+    <div class="dashboard__image"
+        [ngStyle]="{'background-image': 'url(assets/images/background-image.png)'}">
+    </div>
+
+    <div class="dashboard__header">
+        <div class="dashboard__header-info">
+            <img [src]="'/assets/images/burger_menu.svg'" (click)="openSidebar()">
+            Conference Room
+        </div>
+        <div class="dashboard__time-refresh">
+            <button class="dashboard__refresh-btn"
+                [ngClass]="{'active': loader}"
+                (click)="refreshConferenceData()">
+                <img class="dashboard__refresh-icon" [src]="'/assets/images/refresh.svg'">
+            </button>
+
+            <div class="dashboard__time-content">
+                <h3>{{ today | async | date:'hh:mm a' }}</h3>
+                <span>{{ today | async | date:'EEEE, MMMM dd, yyyy' }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard__list">
+        <app-conference-list [facilityItems]="facilityItems">
+        </app-conference-list>
+    </div>
+
+</div>
+<app-loader *ngIf="isLoaderActive"></app-loader>

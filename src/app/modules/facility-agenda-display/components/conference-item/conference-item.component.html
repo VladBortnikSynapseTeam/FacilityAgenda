@@ -1,0 +1,23 @@
+<div class="conference-item__container">
+    <div class="conference-item__icon"
+        [ngClass]="{'progress': this.itemDate < timeNow}">
+        <img [src]="(this.itemDate < timeNow) ? 'assets/images/progress_check.svg' : 'assets/images/calendar.svg'">
+    </div>
+
+    <div class="conference-item__time">
+        <div class="conference-item__option">
+            <span>Start Time</span>
+            
+            <p>{{ item.attributes.startTime | date:'hh:mm a' }}</p>
+        </div>
+        <div class="conference-item__option">
+            <span>End Time</span>
+            
+            <p>{{ item.attributes.endTime | date:'hh:mm a' }}</p>
+        </div>
+    </div>
+
+    <div class="conference-item__title">
+        {{ item.attributes.assetDescription }}
+    </div>
+</div>

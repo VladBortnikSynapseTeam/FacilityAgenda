@@ -1,0 +1,52 @@
+<div class="sidebar__slider"
+    [class.sidebar-slide-in]="facilityAgendaService.sidebarShow$ | async">
+
+    <div class="sidebar__actions">
+        <div class="sidebar__close" (click)="toggleSidebar()">
+            <img [src]="'assets/images/close-icon.svg'">
+        </div>
+
+        <div class="sidebar__settings">
+            <div class="sidebar__input">
+                <input type="text" [placeholder]="'Search by Venue/Facility Category/Facility'">
+            </div>
+            <button>
+                <img [src]="'assets/images/settings-icon.svg'">
+            </button>
+        </div>
+    </div>
+
+    <div class="sidebar__content">
+
+        <ul id="accordion" class="accordion" >
+            <li *ngFor="let menu of menus; let i = index" 
+                [class.active]="menu.active">
+                <div class="menu" (click)="toggle(i)">
+                    <img *ngIf="menu.iconType === 'BUILDING'" [src]="'assets/images/museum.svg'">
+                    <img *ngIf="menu.iconType === 'PLACE'" [src]="'assets/images/map-marker.svg'">
+                    {{ menu.name }}
+                    <div class="menu-count">
+                        {{ menu.submenu.length }}
+                    </div>
+                    <img class="icon" [src]="'assets/images/down-arrow.svg'">
+                </div>
+                <ul class="submenu" #submenu 
+                    [style.height.px]="menu.active ? submenu.scrollHeight : 0">
+                    <li *ngFor="let submenu of menu.submenu">
+                        <a [href]="submenu.url">
+                            <img *ngIf="menu.iconType === 'BUILDING'" [src]="'assets/images/museum.svg'">
+                            <img *ngIf="menu.iconType === 'PLACE'" [src]="'assets/images/map-marker.svg'">
+                            {{ submenu.name }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+    </div>
+
+    <div class="sidebar__customization-btn">
+        <img [src]="'assets/images/custom.svg'">
+        Customization Options
+    </div>
+</div>

@@ -1,0 +1,147 @@
+.dashboard {
+    &__container {
+        height: calc(100vh - 120px);
+        padding: 60px 0;
+        overflow: hidden;
+    }
+
+    &__image {
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 60px;
+        margin-bottom: 60px;
+        height: 150px;
+    }
+
+    &__list {
+        height: calc(100% - 170px);
+    }
+
+    &__header-info {
+        font-size: 42px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+
+        & > img {
+            margin-right: 14px;
+            cursor: pointer;
+        }
+    }
+
+    &__time-refresh {
+        color: #ffffff;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__refresh-btn {
+        margin-right: 19px;
+        background: none;
+        border: none;
+        outline: none;
+
+        &.active {
+            img {
+                animation: spin .8s linear infinite;
+            }
+        }
+    }
+
+    &__refresh-icon {
+        width: 60px;
+        position: relative;
+        top: 2px;
+        cursor: pointer;
+    }
+
+    &__time-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        & > h3 {
+            font-size: 60px;
+            margin: 0;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+
+        & > span {
+            font-size: 19px;
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 1023px) {
+    .dashboard {
+        &__container {
+            padding: 35px 0;
+            height: calc(100vh - 70px);
+        }
+
+        &__header {
+            padding: 0 35px;
+            height: 110px;
+        }
+
+        &__list {
+            height: calc(100% - 150px);
+        }
+
+        &__header-info {
+            font-size: 32px;
+        }
+
+        &__refresh-icon {
+            width: 44px;
+        }
+
+        &__time-content {
+            & > h3 {
+                font-size: 36px;
+            }
+
+            & > span {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .dashboard {
+        &__list {
+            height: calc(100% - 170px);
+        }
+
+        &__header {
+            flex-direction: column;
+            align-items: flex-start;
+            height: 130px;
+        }
+
+        &__time-refresh {
+            width: 100%;
+            justify-content: flex-end;
+            padding-top: 25px;
+        }
+    }
+}

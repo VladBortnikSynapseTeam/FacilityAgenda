@@ -1,0 +1,22 @@
+::-webkit-scrollbar{
+    width: 20px;
+}
+::-webkit-scrollbar-track{
+    background-color: white;
+}
+::-webkit-scrollbar-thumb{
+    background-color: royalblue;
+    border-radius: 40px;
+}
+.conference-list {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        height: 100%;
+
+        app-conference-item {
+            margin-bottom: 30px;
+        }
+    }
+}

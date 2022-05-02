@@ -1,0 +1,7 @@
+<div class="facility-agenda__container" *ngIf="isLoaderActive == false">
+    <app-sidebar></app-sidebar>
+    <router-outlet></router-outlet>
+</div>
+<div class="loader-container">
+    <app-loader *ngIf="isLoaderActive"></app-loader>
+</div>
