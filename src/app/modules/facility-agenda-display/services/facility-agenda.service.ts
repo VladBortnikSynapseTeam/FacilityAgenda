@@ -1,36 +1,20 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IFacilityItemList, ISidebarFacilityData, IUserLoginResponse } from '../interfaces/model';
 
-interface IUserLoginResponse{
-  meta: {
-    token:string
-  }
-}
-
-export interface IFacilityItemList{
-  data: [IFacilityItem]
-}
-
-export interface IFacilityItem{
-  attributes: {
-    startTime: string;
-    endTime: string;
-    assetDescription: string
-  },
-  id: number,
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacilityAgendaService {
   public sidebarShow$ = new BehaviorSubject(false);
+  public sidebarItems$ = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) { }
 
-  public toogle(value?: boolean): void {
+  public toogle(value?: boolean): any {
     (value !== undefined) ? this.sidebarShow$.next(value) : this.sidebarShow$.next(!this.sidebarShow$.value);
   }
 
@@ -46,7 +30,6 @@ export class FacilityAgendaService {
     return this.http.post<IUserLoginResponse>('http://139.99.208.167:7777/V4/RestAPI/OPTIMO/api/V4.1/users/login', JSONUserInfo, httpOptions)
   }
   public getFacilityItems(isoDate: string){
-    console.log(isoDate);
     const HTTP_HEADERS = {
       headers: new HttpHeaders({token: environment.token})
     }
@@ -67,6 +50,6 @@ export class FacilityAgendaService {
     const HTTP_HEADERS = {
       headers: new HttpHeaders({token: environment.token})
     }
-    return this.http.get('http://139.99.208.167:7777/V4/RestAPI/OPTIMO/api/v4.1/assets?fields=Name,Venue.Id,Venue.Name,Facility.FacilityCategoryId,Facility.FacilityCategory&include=Venue&filters.assetClassId=1&filters.activeStatus=1', HTTP_HEADERS)
+    return this.http.get<ISidebarFacilityData>('http://139.99.208.167:7777/V4/RestAPI/OPTIMO/api/v4.1/assets?fields=Name,Venue.Id,Venue.Name,Facility.FacilityCategoryId,Facility.FacilityCategory&include=Venue&filters.assetClassId=1&filters.activeStatus=1', HTTP_HEADERS)
   }
 }

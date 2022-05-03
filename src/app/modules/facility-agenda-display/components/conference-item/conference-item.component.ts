@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IFacilityItem } from '../../services/facility-agenda.service';
+import { IFacilityItem } from '../../interfaces/model';
+
 
 @Component({
   selector: 'app-conference-item',
@@ -16,5 +17,6 @@ export class ConferenceItemComponent implements OnInit {
     console.log(this.item)
     this.itemDate = new Date(this.item.attributes.startTime);
   }
+  
 
 }

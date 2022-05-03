@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { map, takeUntil } from 'rxjs/operators';
 import { interval, of, Subject } from 'rxjs';
-import { FacilityAgendaService, IFacilityItemList } from '../../services/facility-agenda.service';
+import { IFacilityItemList } from '../../interfaces/model';
+import { FacilityAgendaService } from '../../services/facility-agenda.service';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ConferenceDashboardComponent implements OnInit {
     this.isLoaderActive = true;
     let isoDate = this.thisDate.toISOString().toString().slice(0,10)
     this.facilityAgendaService.getFacilityItems(isoDate)
+    .pipe(takeUntil(this.destroyComponent))
     .subscribe(facilityItemsResponse => {
       this.isLoaderActive = false;
       this.facilityItems = facilityItemsResponse;
@@ -42,6 +44,7 @@ export class ConferenceDashboardComponent implements OnInit {
     this.loader = true;
     let isoDate = this.thisDate.toISOString().toString().slice(0,10)
     this.facilityAgendaService.getFacilityItems(isoDate)
+    .pipe(takeUntil(this.destroyComponent))
     .subscribe(facilityItemsResponse => {
       this.facilityItems = facilityItemsResponse;
     })

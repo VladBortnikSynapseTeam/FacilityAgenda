@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FacilityAgendaService } from '../../services/facility-agenda.service';
-import { IFacilityItemList,IFacilityItem } from '../../services/facility-agenda.service';
+import { IFacilityItemList } from '../../interfaces/model';
+
 
 @Component({
   selector: 'app-conference-list',
